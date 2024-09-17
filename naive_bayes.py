@@ -110,15 +110,23 @@ def predict(text, model):
 
 # Preprocess data
 train_data['processed_text'] = train_data['text'].apply(preprocess)
+evaluation_data['processed_text'] = evaluation_data['text'].apply(preprocess)
 test_data['processed_text'] = test_data['text'].apply(preprocess)
 
 # Train Naive Bayes model
 nb_model = train_naive_bayes(train_data['processed_text'], train_data['score'])
 
+# Predict on evaluation data
+evaluation_data['predicted_score'] = evaluation_data['processed_text'].apply(lambda x: predict(x, nb_model))
+
+# Accuracy on evaluation data
+evaluation_accuracy = (evaluation_data['predicted_score'] == evaluation_data['score']).mean()
+print(f'Evaluation Accuracy: {evaluation_accuracy}')
+
 # Predict on test data
 test_data['predicted_score'] = test_data['processed_text'].apply(lambda x: predict(x, nb_model))
 
-# Evaluation: You can now calculate accuracy, precision, recall, etc.
+# Test accuracy
 accuracy = (test_data['predicted_score'] == test_data['score']).mean()
 print(f'Accuracy: {accuracy}')
 
