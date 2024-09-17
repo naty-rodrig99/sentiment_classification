@@ -108,6 +108,6 @@ predictions = predict(X_test, w, b)
 
 #accuracy
 evaluation_accuracy = np.mean(evaluation_predictions == y_evaluation)
-print(f"SVM classification evaluation accuracy: {evaluation_accuracy}")
+print("SVM classification evaluation accuracy:", evaluation_accuracy*100,"%")
 test_accuracy = np.mean(predictions == y_test)
-print(f"SVM classification accuracy: {test_accuracy}")
+print("SVM classification accuracy:", test_accuracy*100,"%")

@@ -111,10 +111,10 @@ nb_model = train_naive_bayes(train_data['processed_text'], train_data['score'])
 #Predict and calculate accuracy on evaluation data
 evaluation_data['predicted_score'] = evaluation_data['processed_text'].apply(lambda x: predict(x, nb_model))
 evaluation_accuracy = (evaluation_data['predicted_score'] == evaluation_data['score']).mean()
-print(f'Evaluation Accuracy: {evaluation_accuracy}')
+print('Evaluation Accuracy:', evaluation_accuracy*100,'%')
 
 #Predict and calculate accuracy on test data
 test_data['predicted_score'] = test_data['processed_text'].apply(lambda x: predict(x, nb_model))
 accuracy = (test_data['predicted_score'] == test_data['score']).mean()
-print(f'Accuracy: {accuracy}')
+print('Accuracy:', accuracy*100,'%')
 
